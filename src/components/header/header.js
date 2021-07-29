@@ -3,13 +3,38 @@ import { jsx, Container, Flex, Button } from 'theme-ui';
 import { keyframes } from '@emotion/core';
 import { Link } from 'react-scroll';
 import Logo from 'components/logo';
-import LogoDark from 'assets/logo.svg';
+// import LogoDark from 'assets/logo.svg';
+import LogoDark from 'assets/logo1.png';
 import MobileDrawer from './mobile-drawer';
 import menuItems from './header.data';
 
 export default function Header({ className }) {
   return (
-      <h1>Header</h1>
+    <header sx={styles.header} className={className} id="header">
+      <Container sx={styles.container}>
+        <Logo src={LogoDark}/>
+        <Flex as="nav" sx={styles.nav}>
+          {menuItems.map((menuItems, i)=> (
+            <Link 
+              activeClass="active"
+              to={menuItems.path}
+              spy={true}
+              smooth={true}
+              offset={-70}
+              duration={500}
+              key={i}
+            >
+              {menuItems.label}
+              
+            </Link>
+          ))}
+        </Flex>
+        <Button className="donate__btn" variant="secondary" aria-label="Get Started">
+            Get Started
+        </Button>
+        <MobileDrawer />
+      </Container>
+    </header>
   );
 }
 
